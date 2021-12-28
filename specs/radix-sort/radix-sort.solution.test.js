@@ -15,6 +15,13 @@ function getDigit(number, place, longestNumber) {
 
   const mod = longestNumber - size;
   return string[place - mod] || 0;
+  // const lengthOfNumber = number.toString().length;
+  // if (lengthOfNumber < place) {
+  //   return 0;
+  // } else {
+  //   const divisor = 10 ** place;
+  //   return number % divisor;
+  // }
 }
 
 function findLongestNumber(array) {

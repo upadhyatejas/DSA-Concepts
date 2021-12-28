@@ -8,9 +8,50 @@
   it ends up being a lot more simple to implement.
 
 */
+function getLongestNumber(array) {
+  const lengthOfArray = array.length;
+  var longestNumber;
+  for (let i = 0; i < lengthOfArray; i++) {
+    const currentLength = array[i].toString().length;
+    longestNumber =
+      currentLength > longestNumber ? currentLength : longestNumber;
+  }
+
+  return longestNumber;
+}
+
+function getDigit(number, place, longestNumber) {
+  // const string = number.toString();
+  // const size = string.length;
+
+  // const mod = longestNumber - size;
+  // return string[place - mod] || 0;
+  const lengthOfNumber = number.toString().length;
+  if (lengthOfNumber < place) {
+    return 0;
+  } else {
+    const divisor = 10 ** place;
+    return number % divisor;
+  }
+}
 
 function radixSort(array) {
   // code goes here
+  const longestNumber = getLongestNumber(array);
+  const bucket = new Array(10).fill([], 0, 11);
+
+  for (let i = longestNumber - 1; i >= 0; i--) {
+    while (array.length) {
+      const current = array.shift();
+      bucket[getDigit(current, i)].push(current);
+    }
+    for (let j = 0; j < 10; j++) {
+      while (bucket[j].length) {
+        array.push(bucket[j].shift());
+      }
+    }
+  }
+  return array;
 }
 
 // unit tests
