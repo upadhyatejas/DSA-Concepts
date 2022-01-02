@@ -5,15 +5,27 @@
 
 function linearSearch(id, array) {
   // code goes here
+  const lengthofArray = array.length;
+  for (let i = 0; i < lengthofArray; i++) {
+    if (array[i].id === id.id) {
+      return array[i].id;
+    }
+  }
 }
 
 function binarySearch(id, array) {
   // code goes here
+  const lengthofArray = array.length;
+  for (let i = 0; i < lengthofArray; i++) {
+    if (array[i].id === id.id) {
+      return array[i].id;
+    }
+  }
 }
 
 // unit tests
 // do not modify the below code
-test.skip("linear search", function () {
+test("linear search", function () {
   const lookingFor = { id: 5, name: "Brian" };
   expect(
     linearSearch(5, [
