@@ -7,8 +7,8 @@ function linearSearch(id, array) {
   // code goes here
   const lengthofArray = array.length;
   for (let i = 0; i < lengthofArray; i++) {
-    if (array[i].id === id.id) {
-      return array[i].id;
+    if (array[i].id === id) {
+      return array[i];
     }
   }
 }
@@ -16,16 +16,22 @@ function linearSearch(id, array) {
 function binarySearch(id, array) {
   // code goes here
   const lengthofArray = array.length;
-  for (let i = 0; i < lengthofArray; i++) {
-    if (array[i].id === id.id) {
-      return array[i].id;
-    }
+  const middleElement = Math.ceil(lengthofArray / 2) - 1;
+  console.log({ middleElement });
+  console.log({ array });
+  console.log(array[middleElement].id);
+  if (array[middleElement].id === id) {
+    return array[middleElement];
+  } else if (array[middleElement].id > id) {
+    return binarySearch(id, array.slice(0, middleElement));
+  } else {
+    return binarySearch(id, array.slice(middleElement, lengthofArray));
   }
 }
 
 // unit tests
 // do not modify the below code
-test("linear search", function () {
+test.skip("linear search", function () {
   const lookingFor = { id: 5, name: "Brian" };
   expect(
     linearSearch(5, [
@@ -41,13 +47,13 @@ test("linear search", function () {
       { id: 18, name: "Jem" },
       { id: 2, name: "Marc" },
       { id: 51, name: "Chris" },
-      lookingFor,
+      { id: 5, name: "Brian" },
       { id: 14, name: "Ben" }
     ])
   ).toBe(lookingFor);
 });
 
-test.skip("binary search", function () {
+test("binary search", function () {
   const lookingFor = { id: 23, name: "Brian" };
   expect(
     binarySearch(23, [
