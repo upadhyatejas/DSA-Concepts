@@ -58,11 +58,10 @@ class LinkedList {
   }
   get(index) {
     const node = this._find(index);
-    if (!node) {
-      return undefined;
-    }
+    if (!node) return void 0;
     return node.value;
   }
+
   delete(index) {
     if (index === 0) {
       const head = this.head;
@@ -70,20 +69,18 @@ class LinkedList {
         this.head = head.next;
       } else {
         this.head = null;
-        this.tail = null;
       }
       this.length--;
       return head.value;
     }
     const node = this._find(index - 1);
-    console.log({ node });
     const excise = node.next;
-    if (!excise) return null;
+    if (!excise) {
+      return null;
+    }
     node.next = excise.next;
     if (!node.next) {
-      this.tail = node.next;
-      const lastnode = node;
-      console.log({ lastnode });
+      this.tail = node;
     }
     this.length--;
     return excise.value;
